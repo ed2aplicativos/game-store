@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "469188373094",
+    "project_id": "game-store-5a391",
+    "storage_bucket": "game-store-5a391.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:469188373094:android:9da296af95694719f91ba7",
+        "android_client_info": {
+          "package_name": "com.ed2aplicativos.new_game_store"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "469188373094-ij36ie3kvckl2grru0ti371n7opjfa65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB7kanzoXFR3r8xPmRzuq2bTMYnV25eKio"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "469188373094-ij36ie3kvckl2grru0ti371n7opjfa65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
