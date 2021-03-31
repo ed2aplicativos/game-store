@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_game_store/models/user_manager.dart';
 import 'package:new_game_store/screens/base/base_screen.dart';
+import 'package:new_game_store/screens/login/login_screen.dart';
 import 'package:new_game_store/screens/signup/signup_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -12,6 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => UserManager(),
+      lazy: false,
       child: MaterialApp(
         title: 'Games Store',
         debugShowCheckedModeBanner: false,
@@ -26,6 +28,10 @@ class MyApp extends StatelessWidget {
         initialRoute: '/base',
         onGenerateRoute: (settings){
           switch(settings.name){
+            case '/login':
+              return MaterialPageRoute(
+                  builder: (_) => LoginScreen()
+              );
             case '/signup':
               return MaterialPageRoute(
                   builder: (_) => SignUpScreen()
