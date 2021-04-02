@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_game_store/models/cart_manager.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/product_manager.dart';
 import 'package:new_game_store/models/user_manager.dart';
@@ -24,6 +25,10 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => ProductManager(),
           lazy: false,
+        ),
+        Provider(
+          create: (_) => CartManager(),
+            lazy: false,
         )
       ],
       child: MaterialApp(
