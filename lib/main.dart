@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:new_game_store/models/cart_manager.dart';
 import 'package:new_game_store/models/product.dart';
@@ -29,7 +27,7 @@ class MyApp extends StatelessWidget {
           create: (_) => ProductManager(),
           lazy: false,
         ),
-        ProxyProvider<UserManager, CartManager>(
+        ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
             lazy: false,
           update: (_, userManager, cartManager) =>
