@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_game_store/common/custom_drawer/custom_drawer.dart';
 import 'package:new_game_store/models/home_manager.dart';
 import 'package:new_game_store/screens/home/components/section_list.dart';
+import 'package:new_game_store/screens/home/components/section_staggered.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,16 +46,16 @@ class HomeScreen extends StatelessWidget {
               Consumer<HomeManager>(
                 builder: (_, homeManager, __){
                   final List<Widget> children = homeManager.sections.map<Widget>(
-                          (section) {
-                        switch(section.type){
-                          case 'List':
-                            return SectionList(section);
-                          case 'Staggered':
-                            return Container();
-                          default:
-                            return Container();
-                        }
+                    (section) {
+                      switch(section.type){
+                        case 'List':
+                          return SectionList(section);
+                        case 'Staggered':
+                          return SectionStaggered(section);
+                        default:
+                          return Container();
                       }
+                    }
                   ).toList();
 
                   return SliverList(
