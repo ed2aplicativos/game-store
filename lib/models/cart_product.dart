@@ -37,6 +37,8 @@ class CartProduct extends ChangeNotifier {
     return product.findSize(size);
   }
 
+  num get totalPrice => unitPrice * quantity;
+
   num get unitPrice {
     if(product == null) return 0;
     return itemSize?.price ?? 0;
@@ -62,6 +64,12 @@ class CartProduct extends ChangeNotifier {
   void decrement(){
     quantity--;
     notifyListeners();
+  }
+
+  bool get hasStock {
+    final size = itemSize;
+    if(size == null) return false;
+    return size.stock >= quantity;
   }
 
 }
