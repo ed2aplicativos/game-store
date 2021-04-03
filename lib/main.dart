@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_game_store/models/cart_manager.dart';
+import 'package:new_game_store/models/home_manager.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/product_manager.dart';
 import 'package:new_game_store/models/user_manager.dart';
@@ -27,9 +28,13 @@ class MyApp extends StatelessWidget {
           create: (_) => ProductManager(),
           lazy: false,
         ),
+        Provider(
+          create: (_) => HomeManager(),
+          lazy: false,
+        ),
         ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
-            lazy: false,
+          lazy: false,
           update: (_, userManager, cartManager) =>
             cartManager..updateUser(userManager),
         ),
@@ -41,7 +46,7 @@ class MyApp extends StatelessWidget {
           primaryColor: const Color.fromARGB(255, 4, 125, 141),
           scaffoldBackgroundColor: const Color.fromARGB(255, 4, 125, 141),
           appBarTheme: const AppBarTheme(
-              elevation: 0
+            elevation: 0
           ),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
