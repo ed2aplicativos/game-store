@@ -32,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                 elevation: 0,
                 backgroundColor: Colors.transparent,
                 flexibleSpace: const FlexibleSpaceBar(
-                  title: Text('Loja do Daniel'),
+                  title: Text('Games Store'),
                   centerTitle: true,
                 ),
                 actions: <Widget>[
