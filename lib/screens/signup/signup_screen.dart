@@ -6,14 +6,14 @@ import 'package:provider/provider.dart';
 
 class SignUpScreen extends StatelessWidget {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+  final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
   final User user = User();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKey,
+      key: scaffoldMessengerKey,
       appBar: AppBar(
         title: const Text('Criar Conta'),
         centerTitle: true,
@@ -95,24 +95,29 @@ class SignUpScreen extends StatelessWidget {
                         formKey.currentState.save();
 
                         if (user.password != user.confirmPassword) {
-                          scaffoldKey.currentState.showSnackBar(SnackBar(
-                            content: const Text('Senhas não coincidem!'),
-                            backgroundColor: Colors.red,
-                          ));
+                          scaffoldMessengerKey.currentState.showSnackBar(
+                            SnackBar(
+                              content: const Text('Senhas não coincidem!'),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
                           return;
                         }
 
                         context.read<UserManager>().signUp(
-                            user: user,
-                            onSuccess: () {
-                              Navigator.of(context).pop();
-                            },
-                            onFail: (e) {
-                              scaffoldKey.currentState.showSnackBar(SnackBar(
+                          user: user,
+                          onSuccess: () {
+                            Navigator.of(context).pop();
+                          },
+                          onFail: (e) {
+                            scaffoldMessengerKey.currentState.showSnackBar(
+                              SnackBar(
                                 content: Text('Falha ao cadastrar: $e'),
                                 backgroundColor: Colors.red,
-                              ));
-                            });
+                              ),
+                            );
+                          },
+                        );
                       }
                     },
                     child: const Text(
