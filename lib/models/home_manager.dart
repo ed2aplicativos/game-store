@@ -3,8 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:new_game_store/models/section.dart';
 
 class HomeManager extends ChangeNotifier {
-
-  HomeManager(){
+  HomeManager() {
     _loadSections();
   }
 
@@ -18,33 +17,35 @@ class HomeManager extends ChangeNotifier {
   final Firestore firestore = Firestore.instance;
 
   Future<void> _loadSections() async {
-    firestore.collection('home').orderBy('pos').snapshots().listen((snapshot) {
-      _sections.clear();
-      for(final DocumentSnapshot document in snapshot.documents){
-        _sections.add(Section.fromDocument(document));
-      }
-      notifyListeners();
-    });
+    firestore.collection('home').orderBy('pos').snapshots().listen(
+      (snapshot) {
+        _sections.clear();
+        for (final DocumentSnapshot document in snapshot.documents) {
+          _sections.add(Section.fromDocument(document));
+        }
+        notifyListeners();
+      },
+    );
   }
 
-  void addSection(Section section){
+  void addSection(Section section) {
     _editingSections.add(section);
     notifyListeners();
   }
 
-  void removeSection(Section section){
+  void removeSection(Section section) {
     _editingSections.remove(section);
     notifyListeners();
   }
 
   List<Section> get sections {
-    if(editing)
+    if (editing)
       return _editingSections;
     else
       return _sections;
   }
 
-  void enterEditing(){
+  void enterEditing() {
     editing = true;
 
     _editingSections = _sections.map((s) => s.clone()).toList();
@@ -54,21 +55,21 @@ class HomeManager extends ChangeNotifier {
 
   Future<void> saveEditing() async {
     bool valid = true;
-    for(final section in _editingSections){
-      if(!section.valid()) valid = false;
+    for (final section in _editingSections) {
+      if (!section.valid()) valid = false;
     }
-    if(!valid) return;
+    if (!valid) return;
 
     loading = true;
     notifyListeners();
 
     int pos = 0;
-    for(final section in _editingSections){
+    for (final section in _editingSections) {
       await section.save(pos);
       pos++;
     }
 
-    for(final section in List.from(_sections)) {
+    for (final section in List.from(_sections)) {
       if (!_editingSections.any((element) => element.id == section.id)) {
         await section.delete();
       }
@@ -78,9 +79,8 @@ class HomeManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void discardEditing(){
+  void discardEditing() {
     editing = false;
     notifyListeners();
   }
-
 }

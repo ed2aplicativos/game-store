@@ -8,7 +8,6 @@ import 'package:new_game_store/screens/products/products_screen.dart';
 import 'package:provider/provider.dart';
 
 class BaseScreen extends StatelessWidget {
-
   final PageController pageController = PageController();
 
   @override
@@ -16,7 +15,7 @@ class BaseScreen extends StatelessWidget {
     return Provider(
       create: (_) => PageManager(pageController),
       child: Consumer<UserManager>(
-        builder: (_, userManager, __){
+        builder: (_, userManager, __) {
           return PageView(
             controller: pageController,
             physics: const NeverScrollableScrollPhysics(),
@@ -35,16 +34,15 @@ class BaseScreen extends StatelessWidget {
                   title: const Text('Home4'),
                 ),
               ),
-              if(userManager.adminEnabled)
-                ...[
-                  AdminUsersScreen(),
-                  Scaffold(
-                    drawer: CustomDrawer(),
-                    appBar: AppBar(
-                      title: const Text('Pedidos'),
-                    ),
+              if (userManager.adminEnabled) ...[
+                AdminUsersScreen(),
+                Scaffold(
+                  drawer: CustomDrawer(),
+                  appBar: AppBar(
+                    title: const Text('Pedidos'),
                   ),
-                ]
+                ),
+              ]
             ],
           );
         },

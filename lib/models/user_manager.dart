@@ -6,8 +6,7 @@ import 'package:new_game_store/helpers/firebase_errors.dart';
 import 'package:new_game_store/models/user.dart';
 
 class UserManager extends ChangeNotifier {
-
-  UserManager(){
+  UserManager() {
     _loadCurrentUser();
   }
 
@@ -17,6 +16,7 @@ class UserManager extends ChangeNotifier {
   User user;
 
   bool _loading = false;
+
   bool get loading => _loading;
 
   bool get isLoggedIn => user != null;
@@ -30,7 +30,7 @@ class UserManager extends ChangeNotifier {
       await _loadCurrentUser(firebaseUser: result.user);
 
       onSuccess();
-    } on PlatformException catch (e){
+    } on PlatformException catch (e) {
       onFail(getErrorString(e.code));
     }
     loading = false;
@@ -47,32 +47,33 @@ class UserManager extends ChangeNotifier {
       await user.saveData();
 
       onSuccess();
-    } on PlatformException catch (e){
+    } on PlatformException catch (e) {
       onFail(getErrorString(e.code));
     }
     loading = false;
   }
 
-  void signOut(){
+  void signOut() {
     auth.signOut();
     user = null;
     notifyListeners();
   }
 
-  set loading(bool value){
+  set loading(bool value) {
     _loading = value;
     notifyListeners();
   }
 
   Future<void> _loadCurrentUser({FirebaseUser firebaseUser}) async {
     final FirebaseUser currentUser = firebaseUser ?? await auth.currentUser();
-    if(currentUser != null){
-      final DocumentSnapshot docUser = await firestore.collection('users')
-          .document(currentUser.uid).get();
+    if (currentUser != null) {
+      final DocumentSnapshot docUser =
+          await firestore.collection('users').document(currentUser.uid).get();
       user = User.fromDocument(docUser);
 
-      final docAdmin = await firestore.collection('admins').document(user.id).get();
-      if(docAdmin.exists){
+      final docAdmin =
+          await firestore.collection('admins').document(user.id).get();
+      if (docAdmin.exists) {
         user.admin = true;
       }
 

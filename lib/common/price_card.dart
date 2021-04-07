@@ -3,7 +3,6 @@ import 'package:new_game_store/models/cart_manager.dart';
 import 'package:provider/provider.dart';
 
 class PriceCard extends StatelessWidget {
-
   const PriceCard({this.buttonText, this.onPressed});
 
   final String buttonText;
@@ -29,7 +28,9 @@ class PriceCard extends StatelessWidget {
                 fontSize: 16,
               ),
             ),
-            const SizedBox(height: 12,),
+            const SizedBox(
+              height: 12,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -38,11 +39,14 @@ class PriceCard extends StatelessWidget {
               ],
             ),
             const Divider(),
-            const SizedBox(height: 12,),
+            const SizedBox(
+              height: 12,
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Total',
+                Text(
+                  'Total',
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ),
                 Text(
@@ -54,7 +58,9 @@ class PriceCard extends StatelessWidget {
                 )
               ],
             ),
-            const SizedBox(height: 8,),
+            const SizedBox(
+              height: 8,
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 primary: Theme.of(context).primaryColor,

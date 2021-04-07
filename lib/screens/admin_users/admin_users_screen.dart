@@ -14,15 +14,15 @@ class AdminUsersScreen extends StatelessWidget {
         centerTitle: true,
       ),
       body: Consumer<AdminUsersManager>(
-        builder: (_, adminUsersManager, __){
+        builder: (_, adminUsersManager, __) {
           return AlphabetListScrollView(
-            itemBuilder: (_, index){
+            itemBuilder: (_, index) {
               return ListTile(
                 title: Text(
                   adminUsersManager.users[index].name,
                   style: TextStyle(
-                      fontWeight: FontWeight.w800,
-                      color: Colors.white
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
                   ),
                 ),
                 subtitle: Text(
@@ -33,10 +33,7 @@ class AdminUsersScreen extends StatelessWidget {
                 ),
               );
             },
-            highlightTextStyle: TextStyle(
-                color: Colors.white,
-                fontSize: 20
-            ),
+            highlightTextStyle: TextStyle(color: Colors.white, fontSize: 20),
             indexedHeight: (index) => 80,
             strList: adminUsersManager.names,
             showPreview: true,

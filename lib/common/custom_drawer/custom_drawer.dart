@@ -5,9 +5,6 @@ import 'package:new_game_store/models/user_manager.dart';
 import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
-
-
-
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -35,8 +32,8 @@ class CustomDrawer extends StatelessWidget {
             page: 3,
           ),
           Consumer<UserManager>(
-            builder: (_, userManager, __){
-              if(userManager.adminEnabled){
+            builder: (_, userManager, __) {
+              if (userManager.adminEnabled) {
                 return Column(
                   children: <Widget>[
                     const Divider(),

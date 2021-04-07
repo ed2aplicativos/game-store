@@ -3,7 +3,6 @@ import 'package:new_game_store/models/page_manager.dart';
 import 'package:provider/provider.dart';
 
 class DrawerTile extends StatelessWidget {
-
   const DrawerTile({this.iconData, this.title, this.page});
 
   final IconData iconData;
@@ -16,7 +15,7 @@ class DrawerTile extends StatelessWidget {
     final Color primaryColor = Theme.of(context).primaryColor;
 
     return InkWell(
-      onTap: (){
+      onTap: () {
         context.read<PageManager>().setPage(page);
       },
       child: SizedBox(
@@ -36,8 +35,7 @@ class DrawerTile extends StatelessWidget {
               style: TextStyle(
                 fontSize: 16,
                 color: curPage == page ? primaryColor : Colors.grey[700],
-              )
-
+              ),
             ),
           ],
         ),

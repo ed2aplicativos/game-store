@@ -6,18 +6,17 @@ import 'package:new_game_store/models/user.dart';
 import 'package:new_game_store/models/user_manager.dart';
 
 class CartManager extends ChangeNotifier {
-
   List<CartProduct> items = [];
 
   User user;
 
   num productsPrice = 0.0;
 
-  void updateUser(UserManager userManager){
+  void updateUser(UserManager userManager) {
     user = userManager.user;
     items.clear();
 
-    if(user != null){
+    if (user != null) {
       _loadCartItems();
     }
   }
@@ -25,40 +24,41 @@ class CartManager extends ChangeNotifier {
   Future<void> _loadCartItems() async {
     final QuerySnapshot cartSnap = await user.cartReference.getDocuments();
 
-    items = cartSnap.documents.map(
-            (d) => CartProduct.fromDocument(d)..addListener(_onItemUpdated)
-    ).toList();
+    items = cartSnap.documents
+        .map((d) => CartProduct.fromDocument(d)..addListener(_onItemUpdated))
+        .toList();
   }
 
-  void addToCart(Product product){
+  void addToCart(Product product) {
     try {
       final e = items.firstWhere((p) => p.stackable(product));
       e.increment();
-    } catch (e){
+    } catch (e) {
       final cartProduct = CartProduct.fromProduct(product);
       cartProduct.addListener(_onItemUpdated);
       items.add(cartProduct);
-      user.cartReference.add(cartProduct.toCartItemMap())
+      user.cartReference
+          .add(cartProduct.toCartItemMap())
           .then((doc) => cartProduct.id = doc.documentID);
       _onItemUpdated();
     }
     notifyListeners();
   }
 
-  void removeOfCart(CartProduct cartProduct){
+  void removeOfCart(CartProduct cartProduct) {
     items.removeWhere((p) => p.id == cartProduct.id);
     user.cartReference.document(cartProduct.id).delete();
     cartProduct.removeListener(_onItemUpdated);
     notifyListeners();
   }
 
-  void _onItemUpdated(){
+  void _onItemUpdated() {
     productsPrice = 0.0;
 
-    for(int i = 0; i<items.length; i++){
+    for (int i = 0; i < items.length; i++) {
       final cartProduct = items[i];
 
-      if(cartProduct.quantity == 0){
+      if (cartProduct.quantity == 0) {
         removeOfCart(cartProduct);
         i--;
         continue;
@@ -72,15 +72,16 @@ class CartManager extends ChangeNotifier {
     notifyListeners();
   }
 
-  void _updateCartProduct(CartProduct cartProduct){
-    if(cartProduct.id != null)
-      user.cartReference.document(cartProduct.id)
+  void _updateCartProduct(CartProduct cartProduct) {
+    if (cartProduct.id != null)
+      user.cartReference
+          .document(cartProduct.id)
           .updateData(cartProduct.toCartItemMap());
   }
 
   bool get isCartValid {
-    for(final cartProduct in items){
-      if(!cartProduct.hasStock) return false;
+    for (final cartProduct in items) {
+      if (!cartProduct.hasStock) return false;
     }
     return true;
   }
