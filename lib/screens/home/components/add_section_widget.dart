@@ -12,20 +12,33 @@ class AddSectionWidget extends StatelessWidget {
     return Row(
       children: <Widget>[
         Expanded(
-            child: FlatButton(
-          onPressed: () {
-            homeManager.addSection(Section(type: 'List'));
-          },
-          textColor: Colors.white,
-          child: const Text('Adicionar Lista'),
-        )),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
+            onPressed: () {
+              homeManager.addSection(Section(type: 'List'));
+            },
+            child: const Text(
+              'Adicionar Lista',
+              style: TextStyle(color: Colors.white),
+            ),
+          ),
+        ),
         Expanded(
-          child: FlatButton(
+          child: TextButton(
+            style: TextButton.styleFrom(
+              backgroundColor: Colors.transparent,
+              elevation: 0,
+            ),
             onPressed: () {
               homeManager.addSection(Section(type: 'Staggered'));
             },
-            textColor: Colors.white,
-            child: const Text('Adicionar Grade'),
+            child: const Text(
+              'Adicionar Grade',
+              style: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ],

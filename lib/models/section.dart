@@ -4,7 +4,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:new_game_store/models/section_item.dart';
-import 'package:new_game_store/screens/home/components/section_header.dart';
 import 'package:uuid/uuid.dart';
 
 class Section extends ChangeNotifier {

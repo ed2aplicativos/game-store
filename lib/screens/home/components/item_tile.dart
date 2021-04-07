@@ -8,7 +8,6 @@ import 'package:new_game_store/models/section.dart';
 import 'package:new_game_store/models/section_item.dart';
 import 'package:provider/provider.dart';
 import 'package:transparent_image/transparent_image.dart';
-import 'package:provider/provider.dart';
 
 class ItemTile extends StatelessWidget {
 
