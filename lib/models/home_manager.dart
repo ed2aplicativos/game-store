@@ -26,7 +26,7 @@ class HomeManager extends ChangeNotifier {
     });
   }
 
-  void addSetcion(Section section){
+  void addSection(Section section){
     _editingSections.add(section);
     notifyListeners();
   }
@@ -61,7 +61,11 @@ class HomeManager extends ChangeNotifier {
     for(final section in _editingSections){
       await section.save();
     }
+
+    editing = false;
+    notifyListeners();
   }
+
   void discardEditing(){
     editing = false;
     notifyListeners();
