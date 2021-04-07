@@ -6,9 +6,8 @@ import 'package:new_game_store/screens/edit_product/components/sizes_form.dart';
 import 'package:provider/provider.dart';
 
 class EditProductScreen extends StatelessWidget {
-
-  EditProductScreen(Product p) :
-        editing = p != null,
+  EditProductScreen(Product p)
+      : editing = p != null,
         product = p != null ? p.clone() : Product();
 
   final Product product;
@@ -44,13 +43,10 @@ class EditProductScreen extends StatelessWidget {
                         hintText: 'Título',
                         border: InputBorder.none,
                       ),
-                      style: TextStyle(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w600
-                      ),
-                      validator: (name){
-                        if(name.length < 6)
-                          return 'Título muito curto';
+                      style:
+                          TextStyle(fontSize: 20, fontWeight: FontWeight.w600),
+                      validator: (name) {
+                        if (name.length < 6) return 'Título muito curto';
                         return null;
                       },
                       onSaved: (name) => product.name = name,
@@ -83,51 +79,58 @@ class EditProductScreen extends StatelessWidget {
                     ),
                     TextFormField(
                       initialValue: product.description,
-                      style: const TextStyle(
-                          fontSize: 16
-                      ),
+                      style: const TextStyle(fontSize: 16),
                       decoration: const InputDecoration(
-                          hintText: 'Descrição',
-                          border: InputBorder.none
-                      ),
+                          hintText: 'Descrição', border: InputBorder.none),
                       maxLines: null,
-                      validator: (desc){
-                        if(desc.length < 10)
-                          return 'Descrição muito curta';
+                      validator: (desc) {
+                        if (desc.length < 10) return 'Descrição muito curta';
                         return null;
                       },
                       onSaved: (desc) => product.description = desc,
                     ),
                     SizesForm(product),
-                    const SizedBox(height: 20,),
+                    const SizedBox(
+                      height: 20,
+                    ),
                     Consumer<Product>(
-                      builder: (_, product, __){
+                      builder: (_, product, __) {
                         return SizedBox(
                           height: 44,
-                          child: RaisedButton(
-                            onPressed: !product.loading ? () async {
-                              if(formKey.currentState.validate()){
-                                formKey.currentState.save();
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                primary: primaryColor,
+                                onSurface: primaryColor.withAlpha(100)),
+                            onPressed: !product.loading
+                                ? () async {
+                                    if (formKey.currentState.validate()) {
+                                      formKey.currentState.save();
 
-                                await product.save();
+                                      await product.save();
 
-                                context.read<ProductManager>()
-                                    .update(product);
+                                      context
+                                          .read<ProductManager>()
+                                          .update(product);
 
-                                Navigator.of(context).pop();
-                              }
-                            } : null,
-                            textColor: Colors.white,
+                                      Navigator.of(context).pop();
+                                    }
+                                  }
+                                : null,
+                            /*textColor: Colors.white,
                             color: primaryColor,
-                            disabledColor: primaryColor.withAlpha(100),
+                            disabledColor: primaryColor.withAlpha(100),*/
                             child: product.loading
                                 ? CircularProgressIndicator(
-                              valueColor: AlwaysStoppedAnimation(Colors.white),
-                            )
+                                    valueColor:
+                                        AlwaysStoppedAnimation(Colors.white),
+                                  )
                                 : const Text(
-                              'Salvar',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
+                                    'Salvar',
+                                    style: TextStyle(
+                                      fontSize: 18.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
                           ),
                         );
                       },

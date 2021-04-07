@@ -76,7 +76,12 @@ class LoginScreen extends StatelessWidget {
                     ),
                     SizedBox(
                       height: 44,
-                      child: RaisedButton(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          primary: Theme.of(context).primaryColor,
+                          onSurface:
+                              Theme.of(context).primaryColor.withAlpha(100),
+                        ),
                         onPressed: userManager.loading
                             ? null
                             : () {
@@ -98,10 +103,10 @@ class LoginScreen extends StatelessWidget {
                                       });
                                 }
                               },
-                        color: Theme.of(context).primaryColor,
+                        /*color: ,
                         disabledColor:
-                            Theme.of(context).primaryColor.withAlpha(100),
-                        textColor: Colors.white,
+
+                        textColor: Colors.white,*/
                         child: userManager.loading
                             ? CircularProgressIndicator(
                                 valueColor:
@@ -109,7 +114,10 @@ class LoginScreen extends StatelessWidget {
                               )
                             : const Text(
                                 'Entrar',
-                                style: TextStyle(fontSize: 18),
+                                style: TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.white,
+                                ),
                               ),
                       ),
                     )
