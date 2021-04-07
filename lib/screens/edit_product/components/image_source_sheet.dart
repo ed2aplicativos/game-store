@@ -42,7 +42,7 @@ class ImageSourceSheet extends StatelessWidget {
           mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            FlatButton(
+            TextButton(
               onPressed: () async {
                 final PickedFile file =
                 await picker.getImage(source: ImageSource.camera);
@@ -50,7 +50,7 @@ class ImageSourceSheet extends StatelessWidget {
               },
               child: const Text('Câmera'),
             ),
-            FlatButton(
+            TextButton(
               onPressed: () async {
                 final PickedFile file =
                 await picker.getImage(source: ImageSource.gallery);
