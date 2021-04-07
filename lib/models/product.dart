@@ -72,7 +72,7 @@ class Product extends ChangeNotifier {
   }
 
   ItemSize findSize(String name){
-    try{
+    try {
       return sizes.firstWhere((s) => s.name == name);
     } catch (e){
       return null;
@@ -101,12 +101,11 @@ class Product extends ChangeNotifier {
 
     final List<String> updateImages = [];
 
-    for(final newImage in newImages) {
-      if (images.contains(newImage)) {
+    for(final newImage in newImages){
+      if(images.contains(newImage)){
         updateImages.add(newImage as String);
       } else {
-        final StorageUploadTask task = storageRef.child(Uuid().v1()).putFile(
-            newImage as File);
+        final StorageUploadTask task = storageRef.child(Uuid().v1()).putFile(newImage as File);
         final StorageTaskSnapshot snapshot = await task.onComplete;
         final String url = await snapshot.ref.getDownloadURL() as String;
         updateImages.add(url);
@@ -129,7 +128,6 @@ class Product extends ChangeNotifier {
     images = updateImages;
 
     loading = false;
-
   }
 
   Product clone(){
