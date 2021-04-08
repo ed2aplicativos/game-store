@@ -4,6 +4,7 @@ import 'package:new_game_store/models/cart_product.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/user.dart';
 import 'package:new_game_store/models/user_manager.dart';
+import 'package:new_game_store/services/cepaperto_service.dart';
 
 class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
@@ -85,4 +86,21 @@ class CartManager extends ChangeNotifier {
     }
     return true;
   }
+
+  // ADDRESS
+
+  Future<void> getAddress(String cep) async {
+    final cepAbertoService = CepAbertoService();
+
+    try {
+      final address = await cepAbertoService.getAddressFromCep(cep);
+
+      print(address);
+
+    } catch (e) {
+      debugPrint(e.toString());
+    }
+  }
+
+
 }

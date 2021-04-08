@@ -13,13 +13,10 @@ import 'package:new_game_store/screens/login/login_screen.dart';
 import 'package:new_game_store/screens/product/product_screen.dart';
 import 'package:new_game_store/screens/select_product/select_product_screen.dart';
 import 'package:new_game_store/screens/signup/signup_screen.dart';
-import 'package:new_game_store/services/cepaperto_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
-
-  CepAbertoService().getAddressFromCep('79.043-091').then((address) => print(address));
 }
 
 class MyApp extends StatelessWidget {
