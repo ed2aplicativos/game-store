@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_game_store/models/address.dart';
+import 'package:new_game_store/models/cart_manager.dart';
+import 'package:provider/provider.dart';
 
 class AddressInputField extends StatelessWidget {
   const AddressInputField(this.address);
@@ -23,7 +25,7 @@ class AddressInputField extends StatelessWidget {
             decoration: const InputDecoration(
               isDense: true,
               labelText: 'Rua/Avenida',
-              hintText: 'Av. Brasil',
+              hintText: 'Rua/Avenida',
             ),
             validator: emptyValidator,
             onSaved: (t) => address.street = t,
@@ -67,7 +69,7 @@ class AddressInputField extends StatelessWidget {
             decoration: const InputDecoration(
               isDense: true,
               labelText: 'Bairro',
-              hintText: 'Guanabara',
+              hintText: 'Bairro',
             ),
             validator: emptyValidator,
             onSaved: (t) => address.district = t,
@@ -82,7 +84,7 @@ class AddressInputField extends StatelessWidget {
                   decoration: const InputDecoration(
                     isDense: true,
                     labelText: 'Cidade',
-                    hintText: 'Campinas',
+                    hintText: 'Cidade',
                   ),
                   validator: emptyValidator,
                   onSaved: (t) => address.city = t,
@@ -100,7 +102,7 @@ class AddressInputField extends StatelessWidget {
                   decoration: const InputDecoration(
                     isDense: true,
                     labelText: 'UF',
-                    hintText: 'SP',
+                    hintText: 'UF',
                     counterText: '',
                   ),
                   maxLength: 2,
@@ -125,7 +127,12 @@ class AddressInputField extends StatelessWidget {
               primary: primaryColor,
               onSurface: primaryColor.withAlpha(100),
             ),
-            onPressed: () {},
+            onPressed: () {
+              if(Form.of(context).validate()){
+                Form.of(context).save();
+                context.read<CartManager>().setAddress(address);
+              }
+            },
             child: const Text(
               'Calcular Frete',
               style: TextStyle(
