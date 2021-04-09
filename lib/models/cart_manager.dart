@@ -7,7 +7,7 @@ import 'package:new_game_store/models/cart_product.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/user.dart';
 import 'package:new_game_store/models/user_manager.dart';
-import 'package:new_game_store/screens/address/address_screen.dart';
+
 import 'package:new_game_store/services/cepaperto_service.dart';
 
 class CartManager extends ChangeNotifier {
@@ -18,6 +18,8 @@ class CartManager extends ChangeNotifier {
 
   num productsPrice = 0.0;
   num deliveryPrice;
+
+  num get totalPrice => productsPrice + (deliveryPrice ?? 0);
 
   final Firestore firestore = Firestore.instance;
 
@@ -95,6 +97,8 @@ class CartManager extends ChangeNotifier {
     return true;
   }
 
+  bool get isAddressValid => address != null && deliveryPrice != null;
+
   // ADDRESS
 
   Future<void> getAddress(String cep) async {
@@ -122,6 +126,7 @@ class CartManager extends ChangeNotifier {
   Future<void> setAddress(Address address) async {
     if(await calculateDelivery(address.lat, address.long)){
       print('price $deliveryPrice');
+      notifyListeners();
     } else {
       return Future.error('Endereço fora do raio de entrega :(');
     }
@@ -129,6 +134,7 @@ class CartManager extends ChangeNotifier {
 
   void removeAddress() {
     address = null;
+    deliveryPrice = null;
     notifyListeners();
   }
 
