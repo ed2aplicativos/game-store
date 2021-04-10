@@ -13,7 +13,7 @@ class ViaCepService {
       final response = await dio.get<Map>(endPoint);
 
       if(response.data.isEmpty){
-        return Future.error('CEP Inváido');
+        return Future.error('CEP Inválido');
 
       }
 
