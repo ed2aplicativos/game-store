@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:new_game_store/models/address.dart';
+import 'package:new_game_store/models/cart_manager.dart';
+import 'package:provider/provider.dart';
 
 class AddressInputField extends StatelessWidget {
   const AddressInputField(this.address);
@@ -125,7 +127,21 @@ class AddressInputField extends StatelessWidget {
               primary: primaryColor,
               onSurface: primaryColor.withAlpha(100),
             ),
-            onPressed: () {},
+            onPressed: () async {
+              if(Form.of(context).validate()){
+                Form.of(context).save();
+                try {
+                  await context.read<CartManager>().setAddress(address);
+                } catch (e){
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('$e'),
+                        backgroundColor: Colors.red,
+                      ),
+                  );
+                }
+              }
+            },
             child: const Text(
               'Calcular Frete',
               style: TextStyle(

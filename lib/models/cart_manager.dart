@@ -15,6 +15,9 @@ class CartManager extends ChangeNotifier {
   Address address;
 
   num productsPrice = 0.0;
+  num deliveryPrice;
+
+  final Firestore firestore = Firestore.instance;
 
   void updateUser(UserManager userManager) {
     user = userManager.user;
@@ -116,5 +119,20 @@ class CartManager extends ChangeNotifier {
   void removeAddress(){
     address = null;
     notifyListeners();
+  }
+
+  Future<void> setAddress(Address address) async {
+    this.address = address;
+
+    calculateDelivery();
+    print('$deliveryPrice');
+  }
+
+  Future<bool> calculateDelivery() async {
+    final DocumentSnapshot doc = await firestore.document('aux/delivery').get();
+    final base = doc.data['base'] as num;
+
+    deliveryPrice = base;
+
   }
 }
