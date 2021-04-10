@@ -1,9 +1,10 @@
 import 'package:dio/dio.dart';
+import 'package:new_game_store/models/viacep_address.dart';
 import 'package:via_cep/via_cep.dart';
 
 class ViaCepService {
 
-  Future<void> getAddressFromCep(String cep) async {
+  Future<ViaCepAddress> getAddressFromCep(String cep) async {
     final cleanCep = cep.replaceAll('.', '').replaceAll('-', '');
     final endPoint = "https://viacep.com.br/ws/$cleanCep/json/";
 
@@ -17,7 +18,9 @@ class ViaCepService {
 
       }
 
-      print(response.data);
+      final ViaCepAddress address = ViaCepAddress.fromMap(response.data);
+
+      return address;
     } on DioError catch (e) {
       return Future.error('Erro ao Buscar CEP');
     }
