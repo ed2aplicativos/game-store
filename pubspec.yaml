@@ -42,6 +42,7 @@ dependencies:
   uuid: ^2.0.4
   dio: ^3.0.9
   via_cep: ^1.0.6
+  brasil_fields: ^0.1.0
 
 dev_dependencies:
   flutter_test:

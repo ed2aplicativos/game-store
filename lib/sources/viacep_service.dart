@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:dio/dio.dart';
 import 'package:new_game_store/models/viacep_address.dart';
 import 'package:via_cep/via_cep.dart';
