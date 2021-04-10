@@ -11,7 +11,10 @@ class CepInputField extends StatelessWidget {
       children: <Widget>[
         TextFormField(
           decoration: const InputDecoration(
-              isDense: true, labelText: 'CEP', hintText: '12.345-678'),
+            isDense: true,
+            labelText: 'CEP',
+            hintText: '12.345-678',
+          ),
           keyboardType: TextInputType.number,
           inputFormatters: [
             FilteringTextInputFormatter.digitsOnly,

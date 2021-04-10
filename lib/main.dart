@@ -13,10 +13,13 @@ import 'package:new_game_store/screens/login/login_screen.dart';
 import 'package:new_game_store/screens/product/product_screen.dart';
 import 'package:new_game_store/screens/select_product/select_product_screen.dart';
 import 'package:new_game_store/screens/signup/signup_screen.dart';
+import 'package:new_game_store/sources/viacep_service.dart';
 import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
+
+  ViaCepService().getAddressFromCep('79.010-190');
 }
 
 class MyApp extends StatelessWidget {
