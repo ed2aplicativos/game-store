@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:new_game_store/models/address.dart';
 import 'package:new_game_store/models/cart_product.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/user.dart';
@@ -10,6 +12,7 @@ class CartManager extends ChangeNotifier {
   List<CartProduct> items = [];
 
   User user;
+  Address address;
 
   num productsPrice = 0.0;
 
@@ -93,9 +96,18 @@ class CartManager extends ChangeNotifier {
     final viaCepService = ViaCepService();
 
     try {
-      final address = await viaCepService.getAddressFromCep(cep);
+      final viaCepAddress = await viaCepService.getAddressFromCep(cep);
 
-      print(address);
+      if(viaCepAddress != null){
+       address = Address(
+         street: viaCepAddress.logradouro,
+         district: viaCepAddress.bairro,
+         zipCode: viaCepAddress.cep,
+         city: viaCepAddress.localidade,
+         state: viaCepAddress.uf,
+       );
+       notifyListeners();
+      }
     } catch (e) {
       debugPrint(e);
     }
