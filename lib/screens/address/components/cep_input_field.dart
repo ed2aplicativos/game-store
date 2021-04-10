@@ -7,7 +7,8 @@ import 'package:new_game_store/models/cart_manager.dart';
 import 'package:provider/provider.dart';
 
 class CepInputField extends StatefulWidget {
-  CepInputField(this.address);
+
+  const CepInputField(this.address);
 
   final Address address;
 
