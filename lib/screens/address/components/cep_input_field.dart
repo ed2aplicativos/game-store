@@ -17,6 +17,7 @@ class CepInputField extends StatefulWidget {
 }
 
 class _CepInputFieldState extends State<CepInputField> {
+
   final TextEditingController cepController = TextEditingController();
 
   @override
@@ -24,7 +25,7 @@ class _CepInputFieldState extends State<CepInputField> {
     final cartManager = context.watch<CartManager>();
     final primaryColor = Theme.of(context).primaryColor;
 
-    if (widget.address.zipCode == null)
+    if(widget.address.zipCode == null)
       return Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
@@ -32,16 +33,19 @@ class _CepInputFieldState extends State<CepInputField> {
             enabled: !cartManager.loading,
             controller: cepController,
             decoration: const InputDecoration(
-                isDense: true, labelText: 'CEP', hintText: '12.345-678'),
+                isDense: true,
+                labelText: 'CEP',
+                hintText: '12.345-678'
+            ),
             inputFormatters: [
               FilteringTextInputFormatter.digitsOnly,
               CepInputFormatter(),
             ],
             keyboardType: TextInputType.number,
-            validator: (cep) {
-              if (cep.isEmpty)
+            validator: (cep){
+              if(cep.isEmpty)
                 return 'Campo obrigatório';
-              else if (cep.length != 10)
+              else if(cep.length != 10)
                 return 'CEP Inválido';
               return null;
             },
@@ -57,7 +61,7 @@ class _CepInputFieldState extends State<CepInputField> {
               onSurface: primaryColor.withAlpha(100),
             ),
             onPressed: !cartManager.loading ? () async {
-              if (Form.of(context).validate()) {
+              if(Form.of(context).validate()){
                 try {
                   await context.read<CartManager>().getAddress(cepController.text);
                 } catch (e) {
@@ -87,15 +91,17 @@ class _CepInputFieldState extends State<CepInputField> {
             Expanded(
               child: Text(
                 'CEP: ${widget.address.zipCode}',
-                style:
-                    TextStyle(color: primaryColor, fontWeight: FontWeight.w600),
+                style: TextStyle(
+                    color: primaryColor,
+                    fontWeight: FontWeight.w600
+                ),
               ),
             ),
             CustomIconButton(
               iconData: Icons.edit,
               color: primaryColor,
               size: 20,
-              onTap: () {
+              onTap: (){
                 context.read<CartManager>().removeAddress();
               },
             ),
