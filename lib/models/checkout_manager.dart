@@ -10,6 +10,7 @@ class CheckoutManager extends ChangeNotifier {
 
   final Firestore firestore = Firestore.instance;
 
+  // ignore: use_setters_to_change_properties
   void updateCart(CartManager cartManager){
     this.cartManager = cartManager;
   }
@@ -19,10 +20,18 @@ class CheckoutManager extends ChangeNotifier {
       await _decrementStock();
     } catch (e){
       onStockFail(e);
-      debugPrint(e.toString());
+      return;
     }
 
-    _getOrderId().then((value) => print(value));
+    // TODO: PROCESSAR PAGAMENTO
+
+    final orderId = await _getOrderId();
+
+    final order = Order.fromCartManager(cartManager);
+    order.orderId = orderId.toString();
+
+    await order.save();
+
   }
 
   Future<int> _getOrderId() async {
