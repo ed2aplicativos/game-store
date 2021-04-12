@@ -5,7 +5,6 @@ import 'package:new_game_store/models/checkout_manager.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutScreen extends StatelessWidget {
-
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
@@ -13,7 +12,7 @@ class CheckoutScreen extends StatelessWidget {
     return ChangeNotifierProxyProvider<CartManager, CheckoutManager>(
       create: (_) => CheckoutManager(),
       update: (_, cartManager, checkoutManager) =>
-      checkoutManager..updateCart(cartManager),
+          checkoutManager..updateCart(cartManager),
       lazy: false,
       child: Scaffold(
         key: scaffoldKey,
@@ -22,18 +21,16 @@ class CheckoutScreen extends StatelessWidget {
           centerTitle: true,
         ),
         body: Consumer<CheckoutManager>(
-          builder: (_, checkoutManager, __){
+          builder: (_, checkoutManager, __) {
             return ListView(
               children: <Widget>[
                 PriceCard(
                   buttonText: 'Finalizar Pedido',
-                  onPressed: (){
-                    checkoutManager.checkout(
-                      onStockFail: (e){
-                        Navigator.of(context).popUntil(
-                                (route) => route.settings.name == '/cart');
-                      },
-                    );
+                  onPressed: () {
+                    checkoutManager.checkout(onStockFail: (e) {
+                      Navigator.of(context)
+                          .popUntil((route) => route.settings.name == '/cart');
+                    });
                   },
                 )
               ],
