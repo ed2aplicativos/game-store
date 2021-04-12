@@ -32,7 +32,7 @@ class CheckoutScreen extends StatelessWidget {
                       onStockFail: (e){
                         Navigator.of(context).popUntil(
                                 (route) => route.settings.name == '/cart');
-                      }
+                      },
                     );
                   },
                 )
