@@ -4,7 +4,7 @@ import 'package:new_game_store/models/item_size.dart';
 import 'package:new_game_store/models/product.dart';
 
 class CartProduct extends ChangeNotifier {
-  CartProduct.fromProduct(this.product) {
+  CartProduct.fromProduct(this._product) {
     productId = product.id;
     quantity = 1;
     size = product.selectedSize.name;
@@ -19,7 +19,6 @@ class CartProduct extends ChangeNotifier {
     firestore.document('products/$productId').get().then(
       (doc) {
         product = Product.fromDocument(doc);
-        notifyListeners();
       },
     );
   }
@@ -32,7 +31,12 @@ class CartProduct extends ChangeNotifier {
   int quantity;
   String size;
 
-  Product product;
+  Product _product;
+  Product get product => _product;
+  set product(Product value){
+    _product = value;
+    notifyListeners();
+  }
 
   ItemSize get itemSize {
     if (product == null) return null;
