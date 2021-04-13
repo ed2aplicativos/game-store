@@ -11,7 +11,7 @@ class Order {
     userId = cartManager.user.id;
     address = cartManager.address;
   }
-  
+
   Order.fromDocument(DocumentSnapshot doc){
     orderId = doc.documentID;
 
@@ -48,5 +48,12 @@ class Order {
   Address address;
 
   Timestamp date;
+
+  String get formattedId => '#${orderId.padLeft(6, '0')}';
+
+  @override
+  String toString() {
+    return 'Order{firestore: $firestore, orderId: $orderId, items: $items, price: $price, userId: $userId, address: $address, date: $date}';
+  }
 
 }
