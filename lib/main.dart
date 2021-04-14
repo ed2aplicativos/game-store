@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:new_game_store/models/admin_users_manager.dart';
 import 'package:new_game_store/models/cart_manager.dart';
 import 'package:new_game_store/models/home_manager.dart';
+import 'package:new_game_store/models/order.dart';
 import 'package:new_game_store/models/orders_manager.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/product_manager.dart';
@@ -10,6 +11,7 @@ import 'package:new_game_store/screens/address/address_screen.dart';
 import 'package:new_game_store/screens/base/base_screen.dart';
 import 'package:new_game_store/screens/cart/cart_screen.dart';
 import 'package:new_game_store/screens/checkout/checkout_screen.dart';
+import 'package:new_game_store/screens/confirmation/confirmation_screen.dart';
 import 'package:new_game_store/screens/edit_product/edit_product_screen.dart';
 import 'package:new_game_store/screens/login/login_screen.dart';
 import 'package:new_game_store/screens/product/product_screen.dart';
@@ -109,6 +111,12 @@ class MyApp extends StatelessWidget {
             case '/select_product':
               return MaterialPageRoute(
                   builder: (_) => SelectProductScreen()
+              );
+            case '/confirmation':
+              return MaterialPageRoute(
+                  builder: (_) => ConfirmationScreen(
+                      settings.arguments as Order
+                  )
               );
             case '/base':
             default:
