@@ -3,7 +3,7 @@ import 'package:new_game_store/common/custom_drawer/custom_drawer.dart';
 import 'package:new_game_store/common/empty_card.dart';
 import 'package:new_game_store/common/login_card.dart';
 import 'package:new_game_store/models/orders_manager.dart';
-import 'package:new_game_store/common/order_tile.dart';
+import 'package:new_game_store/common/order/order_tile.dart';
 import 'package:provider/provider.dart';
 
 class OrdersScreen extends StatelessWidget {

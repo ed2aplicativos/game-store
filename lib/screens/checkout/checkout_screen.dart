@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:new_game_store/common/price_card.dart';
 import 'package:new_game_store/models/cart_manager.dart';
 import 'package:new_game_store/models/checkout_manager.dart';
-import 'package:new_game_store/models/page_manager.dart';
 import 'package:provider/provider.dart';
 
 class CheckoutScreen extends StatelessWidget {
