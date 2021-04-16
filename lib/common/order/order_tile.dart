@@ -65,7 +65,7 @@ class OrderTile extends StatelessWidget {
                     style: TextButton.styleFrom(
                       primary: Colors.red,
                     ),
-                    onPressed: () {},
+                    onPressed: order.cancel,
                     // textColor: Colors.red,
                     child: const Text(
                       'Cancelar',
