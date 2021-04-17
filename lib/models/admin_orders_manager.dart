@@ -7,19 +7,20 @@ import 'package:new_game_store/models/user.dart';
 
 class AdminOrdersManager extends ChangeNotifier {
 
-  List<Order> _orders = [];
+  final List<Order> _orders = [];
 
   User userFilter;
+  List<Status> statusFilter = [Status.preparing];
 
   final Firestore firestore = Firestore.instance;
 
   StreamSubscription _subscription;
 
-  void updateAdmin({bool adminEnabled}) {
+  void updateAdmin({bool adminEnabled}){
     _orders.clear();
 
     _subscription?.cancel();
-    if (adminEnabled) {
+    if(adminEnabled){
       _listenToOrders();
     }
   }
@@ -31,34 +32,44 @@ class AdminOrdersManager extends ChangeNotifier {
       output = output.where((o) => o.userId == userFilter.id).toList();
     }
 
-    return output;
+    return output.where((o) => statusFilter.contains(o.status)).toList();
   }
 
-  void _listenToOrders() {
-    _subscription = firestore.collection('orders').snapshots().listen((event) {
-      for(final change in event.documentChanges){
-        switch(change.type){
-          case DocumentChangeType.added:
-            _orders.add(
-              Order.fromDocument(change.document),
-            );
-            break;
-          case DocumentChangeType.modified:
-            final modOrder = _orders.firstWhere(
-                (o) => o.orderId == change.document.documentID);
-            modOrder.updateFromDocument(change.document);
-            break;
-          case DocumentChangeType.removed:
-            debugPrint('Deu um Problema Sério!!!');
-            break;
-        }
-      }
-      notifyListeners();
-    });
+  void _listenToOrders(){
+    _subscription = firestore.collection('orders').snapshots().listen(
+            (event) {
+          for(final change in event.documentChanges){
+            switch(change.type){
+              case DocumentChangeType.added:
+                _orders.add(
+                    Order.fromDocument(change.document)
+                );
+                break;
+              case DocumentChangeType.modified:
+                final modOrder = _orders.firstWhere(
+                        (o) => o.orderId == change.document.documentID);
+                modOrder.updateFromDocument(change.document);
+                break;
+              case DocumentChangeType.removed:
+                debugPrint('Deu problema sério!!!');
+                break;
+            }
+          }
+          notifyListeners();
+        });
   }
 
   void setUserFilter(User user){
     userFilter = user;
+    notifyListeners();
+  }
+
+  void setStatusFilter({Status status, bool enabled}){
+    if(enabled){
+      statusFilter.add(status);
+    } else {
+      statusFilter.remove(status);
+    }
     notifyListeners();
   }
 
@@ -67,4 +78,5 @@ class AdminOrdersManager extends ChangeNotifier {
     super.dispose();
     _subscription?.cancel();
   }
+
 }
