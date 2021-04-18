@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:new_game_store/common/custom_drawer/custom_drawer.dart';
 import 'package:new_game_store/models/page_manager.dart';
 import 'package:new_game_store/models/user_manager.dart';
@@ -10,13 +11,21 @@ import 'package:new_game_store/screens/products/products_screen.dart';
 import 'package:provider/provider.dart';
 
 class BaseScreen extends StatefulWidget {
-
   @override
   _BaseScreenState createState() => _BaseScreenState();
 }
-
 class _BaseScreenState extends State<BaseScreen> {
+
   final PageController pageController = PageController();
+
+  @override
+  void initState() {
+    super.initState();
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
