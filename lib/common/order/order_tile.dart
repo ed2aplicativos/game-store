@@ -63,17 +63,14 @@ class OrderTile extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.red,
-                    ),
+                  FlatButton(
                     onPressed: (){
                       showDialog(
                           context: context,
                           builder: (_) => CancelOrderDialog(order)
                       );
                     },
-                    // textColor: Colors.red,
+                    textColor: Colors.red,
                     child: const Text(
                       'Cancelar',
                       style: TextStyle(
@@ -81,24 +78,18 @@ class OrderTile extends StatelessWidget {
                       ),
                     ),
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                    ),
+                  FlatButton(
+                    textColor: Colors.black,
                     onPressed: order.back,
                     child: const Text('Recuar'),
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      primary: Colors.black,
-                    ),
+                  FlatButton(
+                    textColor: Colors.black,
                     onPressed: order.advance,
                     child: const Text('Avançar'),
                   ),
-                  TextButton(
-                    style: TextButton.styleFrom(
-                      primary: primaryColor,
-                    ),
+                  FlatButton(
+                    textColor: primaryColor,
                     onPressed: (){
                       showDialog(context: context,
                           builder: (_) => ExportAddressDialog(order.address)
