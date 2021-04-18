@@ -63,6 +63,7 @@ class OrderTile extends StatelessWidget {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
+                  // ignore: deprecated_member_use
                   FlatButton(
                     onPressed: (){
                       showDialog(
@@ -78,16 +79,19 @@ class OrderTile extends StatelessWidget {
                       ),
                     ),
                   ),
+                  // ignore: deprecated_member_use
                   FlatButton(
                     textColor: Colors.black,
                     onPressed: order.back,
                     child: const Text('Recuar'),
                   ),
+                  // ignore: deprecated_member_use
                   FlatButton(
                     textColor: Colors.black,
                     onPressed: order.advance,
                     child: const Text('Avançar'),
                   ),
+                  // ignore: deprecated_member_use
                   FlatButton(
                     textColor: primaryColor,
                     onPressed: (){

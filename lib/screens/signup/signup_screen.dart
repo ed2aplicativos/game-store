@@ -83,49 +83,47 @@ class SignUpScreen extends StatelessWidget {
                 const SizedBox(
                   height: 16,
                 ),
-                SizedBox(
-                  height: 44,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      primary: Theme.of(context).primaryColor,
-                      onSurface: Theme.of(context).primaryColor.withAlpha(100),
-                    ),
-                    onPressed: () {
-                      if (formKey.currentState.validate()) {
-                        formKey.currentState.save();
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    primary: Theme.of(context).primaryColor,
+                    onSurface: Theme.of(context).primaryColor.withAlpha(100),
+                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                  ),
+                  onPressed: () {
+                    if (formKey.currentState.validate()) {
+                      formKey.currentState.save();
 
-                        if (user.password != user.confirmPassword) {
+                      if (user.password != user.confirmPassword) {
+                        scaffoldMessengerKey.currentState.showSnackBar(
+                          const SnackBar(
+                            content: Text('Senhas não coincidem!'),
+                            backgroundColor: Colors.red,
+                          ),
+                        );
+                        return;
+                      }
+
+                      context.read<UserManager>().signUp(
+                        user: user,
+                        onSuccess: () {
+                          Navigator.of(context).pop();
+                        },
+                        onFail: (e) {
                           scaffoldMessengerKey.currentState.showSnackBar(
-                            const SnackBar(
-                              content: Text('Senhas não coincidem!'),
+                            SnackBar(
+                              content: Text('Falha ao cadastrar: $e'),
                               backgroundColor: Colors.red,
                             ),
                           );
-                          return;
-                        }
-
-                        context.read<UserManager>().signUp(
-                          user: user,
-                          onSuccess: () {
-                            Navigator.of(context).pop();
-                          },
-                          onFail: (e) {
-                            scaffoldMessengerKey.currentState.showSnackBar(
-                              SnackBar(
-                                content: Text('Falha ao cadastrar: $e'),
-                                backgroundColor: Colors.red,
-                              ),
-                            );
-                          },
-                        );
-                      }
-                    },
-                    child: const Text(
-                      'Criar Conta',
-                      style: TextStyle(
-                        fontSize: 18,
-                        color: Colors.white,
-                      ),
+                        },
+                      );
+                    }
+                  },
+                  child: const Text(
+                    'Criar Conta',
+                    style: TextStyle(
+                      fontSize: 15,
+                      color: Colors.white,
                     ),
                   ),
                 )
