@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "469188373094-e30288safgcnu43u8nooos3clcmpdffs.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ed2aplicativos.new_game_store",
+            "certificate_hash": "d6caa3bd1921ae7ca919dd3eb84b207a9aabf77a"
+          }
+        },
+        {
           "client_id": "469188373094-ij36ie3kvckl2grru0ti371n7opjfa65.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -29,6 +37,13 @@
             {
               "client_id": "469188373094-ij36ie3kvckl2grru0ti371n7opjfa65.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "469188373094-rn4ditq5e1sflv1vndsd37u84ee0hkue.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.ed2aplicativos.newGameStore"
+              }
             }
           ]
         }

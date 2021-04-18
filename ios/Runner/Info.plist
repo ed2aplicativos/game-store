@@ -70,6 +70,17 @@
             <string>fbauth2</string>
             <string>fbshareextension</string>
         </array>
+        <key>CFBundleURLTypes</key>
+        <array>
+            <dict>
+                <key>CFBundleTypeRole</key>
+                <string>Editor</string>
+                <key>CFBundleURLSchemes</key>
+                <array>
+                    <string>com.googleusercontent.apps.469188373094-rn4ditq5e1sflv1vndsd37u84ee0hkue</string>
+                </array>
+            </dict>
+        </array>
 
 </dict>
 </plist>

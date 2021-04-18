@@ -7,6 +7,7 @@ import 'package:new_game_store/models/order.dart';
 import 'package:new_game_store/models/orders_manager.dart';
 import 'package:new_game_store/models/product.dart';
 import 'package:new_game_store/models/product_manager.dart';
+import 'package:new_game_store/models/stores_manager.dart';
 import 'package:new_game_store/models/user_manager.dart';
 import 'package:new_game_store/screens/address/address_screen.dart';
 import 'package:new_game_store/screens/base/base_screen.dart';
@@ -40,6 +41,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (_) => HomeManager(),
           lazy: false,
+        ),
+        ChangeNotifierProvider(
+          create: (_) => StoresManager(),
         ),
         ChangeNotifierProxyProvider<UserManager, CartManager>(
           create: (_) => CartManager(),
