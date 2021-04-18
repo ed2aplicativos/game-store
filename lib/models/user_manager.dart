@@ -7,6 +7,7 @@ import 'package:new_game_store/helpers/firebase_errors.dart';
 import 'package:new_game_store/models/user.dart';
 
 class UserManager extends ChangeNotifier {
+
   UserManager() {
     _loadCurrentUser();
   }
@@ -17,8 +18,18 @@ class UserManager extends ChangeNotifier {
   User user;
 
   bool _loading = false;
-
   bool get loading => _loading;
+  set loading(bool value){
+    _loading = value;
+    notifyListeners();
+  }
+
+  bool _loadingFace = false;
+  bool get loadingFace => _loadingFace;
+  set loadingFace(bool value){
+    _loadingFace = value;
+    notifyListeners();
+  }
 
   bool get isLoggedIn => user != null;
 
@@ -38,7 +49,7 @@ class UserManager extends ChangeNotifier {
   }
 
   Future<void> facebookLogin({Function onFail, Function onSuccess}) async {
-    loading = true;
+    loadingFace = true;
 
     final result = await FacebookLogin().logIn(['email', 'public_profile']);
 
@@ -71,7 +82,7 @@ class UserManager extends ChangeNotifier {
         break;
     }
 
-    loading = false;
+    loadingFace = false;
   }
 
   void googleLogin(){
@@ -98,11 +109,6 @@ class UserManager extends ChangeNotifier {
   void signOut() {
     auth.signOut();
     user = null;
-    notifyListeners();
-  }
-
-  set loading(bool value) {
-    _loading = value;
     notifyListeners();
   }
 
