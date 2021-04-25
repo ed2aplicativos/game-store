@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomIconButton extends StatelessWidget {
+
   const CustomIconButton({this.iconData, this.color, this.onTap, this.size});
 
   final IconData iconData;

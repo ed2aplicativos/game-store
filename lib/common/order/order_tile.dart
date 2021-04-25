@@ -5,6 +5,7 @@ import 'package:new_game_store/models/order.dart';
 import 'package:new_game_store/common/order/order_product_tile.dart';
 
 class OrderTile extends StatelessWidget {
+
   const OrderTile(this.order, {this.showControls = false});
 
   final Order order;
@@ -44,20 +45,20 @@ class OrderTile extends StatelessWidget {
               order.statusText,
               style: TextStyle(
                   fontWeight: FontWeight.w400,
-                  color: order.status == Status.canceled
-                      ? Colors.red
-                      : primaryColor,
-                  fontSize: 14),
+                  color: order.status == Status.canceled ?
+                  Colors.red : primaryColor,
+                  fontSize: 14
+              ),
             )
           ],
         ),
         children: <Widget>[
           Column(
-            children: order.items.map((e) {
+            children: order.items.map((e){
               return OrderProductTile(e);
             }).toList(),
           ),
-          if (showControls && order.status != Status.canceled)
+          if(showControls && order.status != Status.canceled)
             SizedBox(
               height: 50,
               child: ListView(
@@ -66,39 +67,31 @@ class OrderTile extends StatelessWidget {
                   // ignore: deprecated_member_use
                   FlatButton(
                     onPressed: (){
-                      showDialog(
-                          context: context,
+                      showDialog(context: context,
                           builder: (_) => CancelOrderDialog(order)
                       );
                     },
                     textColor: Colors.red,
-                    child: const Text(
-                      'Cancelar',
-                      style: TextStyle(
-                        color: Colors.red,
-                      ),
-                    ),
+                    child: const Text('Cancelar'),
                   ),
                   // ignore: deprecated_member_use
                   FlatButton(
-                    textColor: Colors.black,
                     onPressed: order.back,
                     child: const Text('Recuar'),
                   ),
                   // ignore: deprecated_member_use
                   FlatButton(
-                    textColor: Colors.black,
                     onPressed: order.advance,
                     child: const Text('Avançar'),
                   ),
                   // ignore: deprecated_member_use
                   FlatButton(
-                    textColor: primaryColor,
                     onPressed: (){
                       showDialog(context: context,
                           builder: (_) => ExportAddressDialog(order.address)
                       );
                     },
+                    textColor: primaryColor,
                     child: const Text('Endereço'),
                   )
                 ],

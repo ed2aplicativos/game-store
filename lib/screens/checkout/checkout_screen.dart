@@ -46,6 +46,7 @@ class CheckoutScreen extends StatelessWidget {
                 ),
               );
             }
+
             return Form(
               key: formKey,
               child: ListView(
@@ -53,18 +54,24 @@ class CheckoutScreen extends StatelessWidget {
                   CreditCardWidget(),
                   PriceCard(
                     buttonText: 'Finalizar Pedido',
-                    onPressed: () {
-                      checkoutManager.checkout(onStockFail: (e) {
-                        Navigator.of(context)
-                            .popUntil((route) => route.settings.name == '/cart');
-                      }, onSuccess: (order) {
-                        Navigator.of(context)
-                            .popUntil((route) => route.settings.name == '/');
-                        Navigator.of(context).pushNamed(
-                            '/confirmation',
-                            arguments: order
-                        );
-                      });
+                    onPressed: (){
+                      if(formKey.currentState.validate()){
+                        print('enviar');
+                        /*checkoutManager.checkout(
+                            onStockFail: (e){
+                              Navigator.of(context).popUntil(
+                                      (route) => route.settings.name == '/cart');
+                            },
+                            onSuccess: (order){
+                              Navigator.of(context).popUntil(
+                                      (route) => route.settings.name == '/');
+                              Navigator.of(context).pushNamed(
+                                  '/confirmation',
+                                  arguments: order
+                              );
+                            }
+                        );*/
+                      }
                     },
                   )
                 ],

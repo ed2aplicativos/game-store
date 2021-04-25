@@ -22,9 +22,9 @@ class ExportAddressDialog extends StatelessWidget {
           color: Colors.white,
           child: Text(
             '${address.street}, ${address.number} ${address.complement}\n'
-                '${address.district}\n'
-                '${address.city}/${address.state}\n'
-                '${address.zipCode}',
+            '${address.district}\n'
+            '${address.city}/${address.state}\n'
+            '${address.zipCode}',
           ),
         ),
       ),
@@ -35,7 +35,6 @@ class ExportAddressDialog extends StatelessWidget {
             Navigator.of(context).pop();
             final file = await screenshotController.capture();
             await GallerySaver.saveImage(file.path);
-            // await GallerySaver.saveImage(file.path);
           },
           child: const Text(
             'Exportar',
