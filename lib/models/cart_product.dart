@@ -31,9 +31,9 @@ class CartProduct extends ChangeNotifier {
     fixedPrice = map['fixedPrice'] as num;
 
     firestore.document('products/$productId').get().then(
-      (doc) {
-        product = Product.fromDocument(doc);
-      }
+            (doc) {
+          product = Product.fromDocument(doc);
+        }
     );
   }
 
