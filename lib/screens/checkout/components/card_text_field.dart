@@ -30,7 +30,6 @@ class CardTextField extends StatelessWidget {
   final Function(String) onSubmitted;
   final TextInputAction textInputAction;
 
-
   @override
   Widget build(BuildContext context) {
     return FormField<String>(
